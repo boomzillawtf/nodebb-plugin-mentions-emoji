@@ -1,0 +1,14 @@
+{
+	"id": "nodebb-plugin-mentions-emoji",
+	"name": "Emoji Mentions",
+	"description": "",
+	"url": "https://github.com/BenLubar/nodebb-plugin-mentions-emoji",
+	"library": "./library.js",
+	"hooks": [
+		{ "hook": "filter:parse.post", "method": "parsePost", "priority": 9 },
+		{ "hook": "filter:parse.raw", "method": "parseRaw", "priority": 9 }
+	],
+	"less": [
+		"static/style.less"
+	]
+}
