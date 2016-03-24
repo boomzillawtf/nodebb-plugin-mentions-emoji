@@ -26,6 +26,10 @@ exports.parseRaw = function(raw, callback) {
 
 	var matches = cleaned.match(regex);
 
+	if (!matches) {
+		return callback(null, raw);
+	}
+
 	matches = matches.filter(function(cur, idx) {
 		// Eliminate duplicates
 		return idx === matches.indexOf(cur);
