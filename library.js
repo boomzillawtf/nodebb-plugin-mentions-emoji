@@ -38,7 +38,7 @@ exports.parseRaw = function(raw, callback) {
 	});
 
 	async.each(matches, function(match, next) {
-		var slug = Utils.slugify(match.slice(1));
+		var slug = utils.slugify(match.slice(1));
 
 		User.getUidByUserslug(slug, function(err, uid) {
 			if (err) {
