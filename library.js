@@ -4,7 +4,7 @@ var XRegExp = module.parent.require('xregexp');
 var User = module.parent.require('./user.js');
 var utils = module.parent.require('../public/src/utils.js');
 
-var regex = XRegExp('(?:>|\\s):@([\\p{L}\\d\\-_.]+):', 'g');
+var regex = XRegExp(':@([\\p{L}\\d\\-_.]+):', 'g');
 
 exports.parsePost = function(data, callback) {
 	if (!data || !data.postData || !data.postData.content) {
@@ -33,12 +33,10 @@ exports.parseRaw = function(raw, callback) {
 	matches = matches.filter(function(cur, idx) {
 		// Eliminate duplicates
 		return idx === matches.indexOf(cur);
-	}).map(function(match) {
-		return match.slice(match.indexOf('@') + 1, -1);
 	});
 
 	async.each(matches, function(match, next) {
-		var slug = utils.slugify(match.slice(1));
+		var slug = utils.slugify(match.slice(2, -1));
 
 		User.getUidByUserslug(slug, function(err, uid) {
 			if (err) {
@@ -55,11 +53,10 @@ exports.parseRaw = function(raw, callback) {
 				}
 
 				if (!picture) {
+					return next(null);
 				}
 
-				raw = raw.replace(new RegExp('([>|\\s])' + match, 'g'), function(match, before) {
-					return before + '<a class="plugin-mentions-emoji-a" href="' + nconf.get('url') + '/user/' + slug + '"><img src="' + picture + '" class="plugin-mentions-emoji" alt="' + match + '" title="' + match + '" /></a>'
-				});
+				raw = raw.replace(new RegExp(match, 'g'), '<a class="plugin-mentions-emoji-a" href="' + nconf.get('url') + '/user/' + slug + '"><img src="' + picture + '" class="plugin-mentions-emoji" alt="' + match.slice(2, -1) + '" title="' + match.slice(2, -1) + '" /></a>');
 
 				next(null);
 			});
