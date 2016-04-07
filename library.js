@@ -56,7 +56,7 @@ exports.parseRaw = function(raw, callback) {
 					return next(null);
 				}
 
-				raw = raw.replace(new RegExp(match, 'g'), '<a class="plugin-mentions-emoji-a" href="' + nconf.get('url') + '/user/' + slug + '"><img src="' + picture + '" class="plugin-mentions-emoji" alt="' + match.slice(2, -1) + '" title="' + match.slice(2, -1) + '" /></a>');
+				raw = raw.replace(new RegExp(match, 'g'), '<a class="plugin-mentions-emoji-a" href="' + nconf.get('url') + '/user/' + slug + '"><img src="' + picture + '" class="plugin-mentions-emoji not-responsive" alt="' + match.slice(2, -1) + '" title="' + match.slice(2, -1) + '" width="20" height="20" /></a>');
 
 				next(null);
 			});
