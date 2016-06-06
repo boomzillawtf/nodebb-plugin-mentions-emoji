@@ -22,11 +22,16 @@ exports.parsePost = function(data, callback) {
 };
 
 exports.parseRaw = function(raw, callback) {
-	var cleaned = raw.replace(/<code>.*<\/code>/gm, '');
+	var split = raw.split(/(<a[\s\S]*?<\/a>|<code[\s\S]*?<\/code>)/gm);
 
-	var matches = cleaned.match(regex);
+	var matches = [];
+	split.forEach(function(cleaned, i) {
+		if ((i & 1) === 0) {
+			matches = matches.concat(cleaned.match(regex) || []);
+		}
+	});
 
-	if (!matches) {
+	if (!matches.length) {
 		return callback(null, raw);
 	}
 
@@ -56,12 +61,20 @@ exports.parseRaw = function(raw, callback) {
 					return next(null);
 				}
 
-				raw = raw.replace(new RegExp(match, 'g'), '<a class="plugin-mentions-emoji-a" href="' + nconf.get('url') + '/user/' + slug + '"><img src="' + picture + '" class="plugin-mentions-emoji not-responsive" alt="' + match.slice(2, -1) + '" title="' + match.slice(2, -1) + '" width="20" height="20" /></a>');
+				split = split.map(function(content, i) {
+					if ((i & 1) === 1) {
+						return content;
+					}
+
+					return content.replace(new RegExp(match, 'g'), function() {
+						return '<a class="plugin-mentions-emoji-a" href="' + nconf.get('url') + '/uid/' + uid + '"><img src="' + picture + '" class="plugin-mentions-emoji not-responsive" alt="' + match.slice(2, -1) + '" title="' + match.slice(2, -1) + '" width="20" height="20" /></a>';
+					});
+				});
 
 				next(null);
 			});
 		});
 	}, function(err) {
-		callback(err, raw);
+		callback(err, split.join(''));
 	});
 };
