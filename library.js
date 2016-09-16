@@ -66,7 +66,7 @@ exports.parseRaw = function(raw, callback) {
 						return content;
 					}
 
-					var re = new RegExp('((?:^|>)[^<]*)' + match);
+					var re = new RegExp('((?:^|>)[^<]*)' + match, 'gm');
 
 					return content.replace(re, function recurse(all, prefix) {
 						return prefix.replace(re, recurse) + '<a class="plugin-mentions-emoji-a" href="' + nconf.get('url') + '/uid/' + uid + '"><img src="' + picture + '" class="plugin-mentions-emoji not-responsive" alt="' + match.slice(2, -1) + '" title="' + match.slice(2, -1) + '" width="20" height="20" /></a>';
