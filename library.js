@@ -66,8 +66,8 @@ exports.parseRaw = function(raw, callback) {
 						return content;
 					}
 
-					return content.replace(new RegExp(match, 'g'), function() {
-						return '<a class="plugin-mentions-emoji-a" href="' + nconf.get('url') + '/uid/' + uid + '"><img src="' + picture + '" class="plugin-mentions-emoji not-responsive" alt="' + match.slice(2, -1) + '" title="' + match.slice(2, -1) + '" width="20" height="20" /></a>';
+					return content.replace(new RegExp('((?:^|>)[^<]*)' + match, 'g'), function(all, prefix) {
+						return prefix + '<a class="plugin-mentions-emoji-a" href="' + nconf.get('url') + '/uid/' + uid + '"><img src="' + picture + '" class="plugin-mentions-emoji not-responsive" alt="' + match.slice(2, -1) + '" title="' + match.slice(2, -1) + '" width="20" height="20" /></a>';
 					});
 				});
 
