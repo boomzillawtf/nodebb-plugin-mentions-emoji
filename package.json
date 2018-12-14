@@ -1,6 +1,6 @@
 {
   "name": "nodebb-plugin-mentions-emoji",
-  "version": "0.0.6",
+  "version": "0.0.7",
   "description": "",
   "main": "library.js",
   "scripts": {
@@ -10,14 +10,13 @@
     "type": "git",
     "url": "https://github.com/BenLubar/nodebb-plugin-mentions-emoji"
   },
-  "keywords": [
-  ],
+  "keywords": [],
   "author": "Ben Lubar",
   "license": "BSD-2-Clause",
   "bugs": {
     "url": "https://github.com/BenLubar/nodebb-plugin-mentions-emoji/issues"
   },
   "nbbpm": {
-    "compatibility": "^1.0.0"
+    "compatibility": "^1.11.0"
   }
 }

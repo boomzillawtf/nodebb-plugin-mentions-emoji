@@ -1,8 +1,8 @@
-var async = module.parent.require('async');
-var nconf = module.parent.require('nconf');
-var XRegExp = module.parent.require('xregexp');
-var User = module.parent.require('./user.js');
-var utils = module.parent.require('../public/src/utils.js');
+var async = require.main.require('async');
+var nconf = require.main.require('nconf');
+var XRegExp = require.main.require('xregexp');
+var User = require.main.require('./src/user');
+var utils = require.main.require('./public/src/utils.js');
 
 var regex = XRegExp(':@([\\p{L}\\d\\-_.]+):', 'g');
 
