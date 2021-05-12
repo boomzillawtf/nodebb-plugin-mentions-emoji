@@ -8,13 +8,13 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/BenLubar/nodebb-plugin-mentions-emoji"
+    "url": "https://github.com/boomzillawtf/nodebb-plugin-mentions-emoji"
   },
   "keywords": [],
   "author": "Ben Lubar",
   "license": "BSD-2-Clause",
   "bugs": {
-    "url": "https://github.com/BenLubar/nodebb-plugin-mentions-emoji/issues"
+    "url": "https://github.com/boomzillawtf/nodebb-plugin-mentions-emoji/issues"
   },
   "nbbpm": {
     "compatibility": "^1.11.0"
